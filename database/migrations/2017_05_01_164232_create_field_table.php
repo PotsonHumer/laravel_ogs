@@ -18,7 +18,7 @@ class CreateFieldTable extends Migration
 
         Schema::create($tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('map')->index()->comment('Map ID');
+            $table->unsignedBigInteger('dataid')->index()->comment('data ID');
             $table->char('lang',5)->index()->comment('語系標籤');
             $table->string('name')->index()->comment('欄位名稱');
             $table->string('value')->index()->comment('欄位資料');
@@ -27,7 +27,7 @@ class CreateFieldTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '類別欄位表'");
+        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料欄位表'");
     }
 
     /**

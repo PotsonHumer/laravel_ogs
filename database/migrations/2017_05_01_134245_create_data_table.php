@@ -20,12 +20,15 @@ class CreateDataTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
             $table->unsignedInteger('modelid')->index()->comment('模組ID');
-            $table->text('parent')->nullable()->comment('父系ID (json)');
+            $table->string('type')->index()->default('data')->comment('資料類別 data => 資料、catalog => 分類');
+            $table->boolean('status')->default(true)->comment('啟用狀態');
+            $table->boolean('hot')->default(false)->comment('熱門標記狀態');
+            $table->boolean('new')->default(false)->comment('最新標記狀態');
             $table->softDeletes()->comment('刪除標籤');
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料索引表'");
+        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料整合表'");
     }
 
     /**
