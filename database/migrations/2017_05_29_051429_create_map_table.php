@@ -20,10 +20,17 @@ class CreateMapTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
             $table->unsignedInteger('modelid')->index()->comment('模組ID');
-            
+
+            $table->unsignedBigInteger('dataid')->index()->comment('對應資料ID');
+            $table->foreign('dataid')->references('id')->on('data')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unsignedInteger('level')->index()->default(0)->comment('所屬分類層次');
+            $table->integer('sort')->default(0)->comment('排序號碼');
+            $table->text('struct')->nullable()->default(NULL)->comment('分類結構 json ([id,...])');
+            $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料索引表'");
+        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料分類索引表'");
     }
 
     /**
