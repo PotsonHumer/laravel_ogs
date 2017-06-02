@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFieldTable extends Migration
+class CreateMapTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFieldTable extends Migration
      */
     public function up()
     {
-        $tableName = 'field';
+        $tableName = 'map';
         $dbPrefix = Config::get('database.connections.mysql.prefix');
 
         Schema::create($tableName, function (Blueprint $table) {
@@ -22,21 +22,19 @@ class CreateFieldTable extends Migration
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
             $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedInteger('modelid')->index()->comment('模組ID');
+            $table->unsignedBigInteger('modelid')->index()->comment('模組ID');
             $table->foreign('modelid')->references('id')->on('model')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('dataid')->index()->comment('data ID');
+            $table->unsignedBigInteger('dataid')->index()->comment('對應資料ID');
             $table->foreign('dataid')->references('id')->on('data')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->char('lang',5)->index()->comment('語系標籤');
-            $table->string('name')->index()->comment('欄位名稱');
-            $table->string('value')->index()->comment('欄位資料');
-            $table->text('content')->comment('欄位資料 (text)');
-            $table->softDeletes()->comment('刪除標籤');
+            $table->unsignedInteger('level')->index()->default(0)->comment('所屬分類層次');
+            $table->integer('sort')->default(0)->comment('排序號碼');
+            $table->text('struct')->nullable()->default(NULL)->comment('分類結構 json ([id,...])');
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料欄位表'");
+        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料分類索引表'");
     }
 
     /**
@@ -46,6 +44,6 @@ class CreateFieldTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('field');
+        Schema::dropIfExists('map');
     }
 }

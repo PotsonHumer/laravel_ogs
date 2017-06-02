@@ -22,7 +22,7 @@ class CreateDataTable extends Migration
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
             $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedInteger('modelid')->index()->comment('模組ID');
+            $table->unsignedBigInteger('modelid')->index()->comment('模組ID');
             $table->foreign('modelid')->references('id')->on('model')->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('type')->index()->default('data')->comment('資料類別 data => 資料、catalog => 分類');

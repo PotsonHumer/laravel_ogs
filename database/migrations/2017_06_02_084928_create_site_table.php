@@ -32,8 +32,6 @@ class CreateSiteTable extends Migration
      */
     public function down()
     {
-        Schema::table('site', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('site');
     }
 }
