@@ -18,7 +18,7 @@ class CreateModelTable extends Migration
 
         Schema::create($tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
+            $table->boolean('status')->nullable()->default(NULL)->comment('模組狀態; NULL => 全系統關閉, 0 => 前台關閉, 1 => 啟用');
             $table->string('name')->nullable()->default(NULL)->comment('模組名稱');
         });
 

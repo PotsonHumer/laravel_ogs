@@ -18,8 +18,12 @@ class CreateMapTable extends Migration
 
         Schema::create($tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
-            $table->unsignedInteger('modelid')->index()->comment('模組ID');
+            $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unsignedBigInteger('modelid')->index()->comment('模組ID');
+            $table->foreign('modelid')->references('id')->on('model')->onUpdate('cascade')->onDelete('cascade');
 
             $table->unsignedBigInteger('dataid')->index()->comment('對應資料ID');
             $table->foreign('dataid')->references('id')->on('data')->onUpdate('cascade')->onDelete('cascade');
