@@ -11,12 +11,14 @@ class CreateDataTable extends Migration
      *
      * @return void
      */
+
+    private $tableName = 'data';
+
     public function up()
     {
-        $tableName = 'data';
         $dbPrefix = Config::get('database.connections.mysql.prefix');
 
-        Schema::create($tableName, function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
@@ -33,7 +35,7 @@ class CreateDataTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料整合表'");
+        DB::statement("ALTER TABLE `$dbPrefix$this->tableName` comment '資料整合表'");
     }
 
     /**
@@ -43,6 +45,10 @@ class CreateDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data');
+        Schema::table($this->tableName, function (Blueprint $table) {
+            $table->dropForeign(['siteid']);
+            $table->dropForeign(['modelid']);
+            $table->dropIfExists($this->tableName);
+        });
     }
 }

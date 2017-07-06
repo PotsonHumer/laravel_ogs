@@ -11,12 +11,14 @@ class CreateFieldTable extends Migration
      *
      * @return void
      */
+
+    private $tableName = 'field';
+
     public function up()
     {
-        $tableName = 'field';
         $dbPrefix = Config::get('database.connections.mysql.prefix');
 
-        Schema::create($tableName, function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
@@ -36,7 +38,7 @@ class CreateFieldTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料欄位表'");
+        DB::statement("ALTER TABLE `$dbPrefix$this->tableName` comment '資料欄位表'");
     }
 
     /**
@@ -46,6 +48,11 @@ class CreateFieldTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('field');
+        Schema::table($this->tableName, function (Blueprint $table) {
+            $table->dropForeign(['siteid']);
+            $table->dropForeign(['modelid']);
+            $table->dropForeign(['dataid']);
+            $table->dropIfExists($this->tableName);
+        });
     }
 }

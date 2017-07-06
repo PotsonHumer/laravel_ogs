@@ -11,12 +11,14 @@ class CreateMapTable extends Migration
      *
      * @return void
      */
+
+    private $tableName = 'map';
+
     public function up()
     {
-        $tableName = 'map';
         $dbPrefix = Config::get('database.connections.mysql.prefix');
 
-        Schema::create($tableName, function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
@@ -34,7 +36,7 @@ class CreateMapTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$tableName` comment '資料分類索引表'");
+        DB::statement("ALTER TABLE `$dbPrefix$this->tableName` comment '資料分類索引表'");
     }
 
     /**
@@ -44,6 +46,11 @@ class CreateMapTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('map');
+        Schema::table($this->tableName, function (Blueprint $table) {
+            $table->dropForeign(['siteid']);
+            $table->dropForeign(['modelid']);
+            $table->dropForeign(['dataid']);
+            $table->dropIfExists($this->tableName);
+        });
     }
 }
