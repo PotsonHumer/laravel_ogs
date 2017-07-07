@@ -28,7 +28,6 @@ class CreateFileTable extends Migration
             $table->string('mime')->index()->comment('檔案 MIME 類型');
             $table->string('auth')->index()->nullable()->default(NULL)->comment('檔案權限');
             $table->text('path')->nullable()->default(NULL)->comment('檔案位置');
-            $table->softDeletes()->comment('刪除標籤');
             $table->timestamps();
         });
 
