@@ -24,10 +24,16 @@ class CreateUserTable extends Migration
             $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
             $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('f_name')->nullable()->default(NULL)->comment('名稱');
+            $table->string('l_name')->nullable()->default(NULL)->comment('姓氏');
+            $table->string('nickname')->nullable()->default(NULL)->comment('稱號');
+
+            $table->unsignedBigInteger('avatar')->nullable()->default(NULL)->comment('大頭圖');
+            $table->foreign('avatar')->references('id')->on('file')->onUpdate('cascade')->onDelete('set null');
+
+            $table->string('email')->index()->comment('email');
+            $table->string('password')->comment('密碼');
+            $table->rememberToken()->comment('auth token');
             $table->timestamps();
         });
 
