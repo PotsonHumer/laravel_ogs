@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -31,9 +32,19 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
+     * @param  Array $field - key: 會員資料預設欄位 & value: 檢查規則
      * @return void
      */
+
+    private $field = [
+        'l_name'   => 'required|max:255',
+        'f_name'   => 'required|max:255',
+        'nickname' => 'required|max:255',
+        'avatar'   => 'nullable',
+        'email'    => 'required|email|max:255|unique:users',
+        'password' => 'required|min:6|confirmed'
+    ];
+
     public function __construct()
     {
         $this->middleware('guest');
@@ -47,11 +58,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+        return Validator::make($data, $this->field);
     }
 
     /**
@@ -62,10 +69,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $fields = array_keys($this->field);
+
+        foreach($fields as $field){
+            switch(true){
+                case ($field == 'password'):
+                    $handleValue = bcrypt($data[$field]);
+                break;
+                case (empty($data[$field])):
+                    $handleValue = NULL;
+                break;
+                default:
+                    $handleValue = $data[$field];
+                break;
+            }
+
+            $create[$field] = $handleValue;
+        }
+
+        return User::create($create);
+    }
+
+    protected function register(Request $request){
+
+        $post = $request->all();
+        $validator = $this->validator($post);
+
+        if(!$validator->fails()){
+            $this->create($post);
+        }else{
+            return redirect()->back()
+                ->withInput($request->only(['l_name','f_name','nickname','email'], 'remember'))
+                ->withErrors($validator->messages());
+        }
     }
 }
