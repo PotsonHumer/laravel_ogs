@@ -21,8 +21,9 @@ class CreateUserTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
+            $table->unsignedBigInteger('siteid')->index()->nullable()->default(NULL)->comment('站點ID');
             $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
+            $table->boolean('admin')->index()->default(false)->comment('後台管理員標記');
 
             $table->string('f_name')->nullable()->default(NULL)->comment('名稱');
             $table->string('l_name')->nullable()->default(NULL)->comment('姓氏');
