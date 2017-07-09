@@ -15,6 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', 'HomeController@index');
+
+
+/**
+* 會員路由
+*/
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+/**
+* 後台路由
+*/
+Route::group(['prefix' => 'admin'], function() {
+	Route::get('/login', 'AdminController@loginForm');
+	Route::post('/login', 'AdminController@login');
+
+	Route::group(['middleware' => 'auth.admin'], function() {
+		Route::get('/', 'AdminController@index');
+	});
+});
