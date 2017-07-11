@@ -23,6 +23,10 @@ class CreateUserTable extends Migration
 
             $table->unsignedBigInteger('siteid')->index()->nullable()->default(NULL)->comment('站點ID');
             $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unsignedBigInteger('auth')->index()->nullable()->default(NULL)->comment('綁定會員權限');
+            $table->foreign('auth')->references('id')->on('auth')->onUpdate('cascade')->onDelete('set null');
+
             $table->boolean('admin')->index()->default(false)->comment('後台管理員標記');
 
             $table->string('f_name')->nullable()->default(NULL)->comment('名稱');

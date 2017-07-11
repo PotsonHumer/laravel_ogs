@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFileTable extends Migration
+class CrateAuthTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateFileTable extends Migration
      * @return void
      */
 
-    private $tableName = 'file';
+    private $tableName = 'auth';
 
     public function up()
     {
@@ -21,20 +21,16 @@ class CreateFileTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('siteid')->index()->comment('站點ID');
+            $table->unsignedBigInteger('siteid')->index()->nullable()->default(NULL)->comment('站點ID');
             $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('auth')->index()->nullable()->default(NULL)->comment('綁定會員權限');
-            $table->foreign('auth')->references('id')->on('auth')->onUpdate('cascade')->onDelete('set null');
+            $table->string('name')->nullable()->default(NULL)->comment('權限名稱');
+            $table->integer('level')->nullable()->default(NULL)->comment('權限等級; NULL 為最低等級 (一般使用者)');
 
-            $table->string('name')->index()->comment('檔案名稱');
-            $table->string('mime')->index()->comment('檔案 MIME 類型');
-
-            $table->text('path')->nullable()->default(NULL)->comment('檔案位置');
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `$dbPrefix$this->tableName` comment '檔案資料表'");
+        DB::statement("ALTER TABLE `$dbPrefix$this->tableName` comment '會員權限資料表'");
     }
 
     /**
