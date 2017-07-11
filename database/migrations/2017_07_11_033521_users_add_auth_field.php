@@ -25,6 +25,8 @@ class UsersAddAuthField extends Migration
      */
     public function down()
     {
-        //
+	Scema::table('users', function(Blueprint $table){
+            $table->dropColumn('auth');
+        });
     }
 }
