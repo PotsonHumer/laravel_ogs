@@ -13,7 +13,9 @@ class UsersAddAuthField extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('users', function(Blueprint $table){
+	    $table->string('auth')->comment('權限欄位');
+	});
     }
 
     /**
