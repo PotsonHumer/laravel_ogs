@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 
 class AdminController extends Controller
 {
@@ -73,11 +74,15 @@ class AdminController extends Controller
 
             if(Auth::attempt($loginData)){
                 return redirect('admin');
+            }else{
+                $errMessage = ['errMessage' => Lang::get('auth.failed')];
             }
+        }else{
+            $errMessage = $validator->messages();
         }
 
         return redirect()->back()
             ->withInput($request->only(['email'], 'remember'))
-            ->withErrors($validator->messages());
+            ->withErrors($errMessage);
     }
 }
