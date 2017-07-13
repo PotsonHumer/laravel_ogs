@@ -28,6 +28,8 @@ Auth::routes();
 */
 Route::group(['prefix' => 'admin'], function() {
 	Route::get('/login', 'AdminController@loginForm');
+	Route::get('/logout', 'AdminController@logout');
+
 	Route::post('/login', 'AdminController@login');
 
 	Route::group(['middleware' => 'auth.admin'], function() {

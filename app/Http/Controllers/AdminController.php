@@ -85,4 +85,15 @@ class AdminController extends Controller
             ->withInput($request->only(['email'], 'remember'))
             ->withErrors($errMessage);
     }
+
+
+    /**
+    * 登出
+    */
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('/');
+    }
 }
