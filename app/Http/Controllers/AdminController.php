@@ -39,7 +39,7 @@ class AdminController extends Controller
     */
     public function index()
     {
-        echo 'admin?';
+        return view('admin/dashboard');
     }
 
 

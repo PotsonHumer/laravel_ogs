@@ -188,6 +188,7 @@ body{
 }
 
 body:before{
+	position: fixed !important;
 	background: #03bbdd;
 	background: -moz-linear-gradient(top, #03bbdd 0%, #00b1a9 100%);
 	background: -webkit-linear-gradient(top, #03bbdd 0%,#00b1a9 100%);
@@ -198,6 +199,7 @@ body:before{
 }
 
 body:after{
+	position: fixed !important;
 	background-image: url('../images/logo_bf.svg');
 	background-size: 50%;
 	background-position: center;
@@ -297,6 +299,8 @@ aside{
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.8);
 	z-index: 2;
 	border-right: 2px solid #000;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 aside:before{
@@ -311,13 +315,36 @@ aside:before{
 }
 
 aside ul{
+	display: block;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-aside li{
-	padding: 0.5em 15px;
+aside ul ul{
+	padding-left: 30px;
+	padding-bottom: 30px;
+	overflow: hidden;
+}
+
+aside li a{
+	display: block;
+	padding: 0.5em 0;
+	border-bottom: 1px solid rgba(255,255,255,0.2);
+	color: #FFF;
+}
+
+aside li a:hover{
+	text-decoration: none;
+	color: #03BBDD;
+}
+
+aside ul ul li a{
+	color: #BBB;
+}
+
+aside > ul > li > a i{
+	margin-left: auto;
 }
 
 /** aside end **/

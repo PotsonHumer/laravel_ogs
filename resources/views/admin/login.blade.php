@@ -4,7 +4,9 @@
 <div id="loginForm" class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
 	<form action="{{ url('/admin/login') }}" method="post">
 
-		<h1>歐格思雲端 <small>後台管理系統登入</small></h1>
+		<div id="logo" class="flex flex-center"><img src="{{ URL::asset('/images/logo_b.svg') }}" class="img-responsive"></div>
+
+		<h1 class="text-center">歐格思雲端 <small>後台管理系統登入</small></h1>
 
 		<div class="form-group">
 			<div class="input-group">

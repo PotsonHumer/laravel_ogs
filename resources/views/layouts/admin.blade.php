@@ -10,19 +10,21 @@
     <!-- Styles -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/admin.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="floatBgBefore floatBgAfter">
 
     @if (Auth::check())
     <header class="container-fluid floatBgBefore floatBgAfter">
         <div class="row flex flex-middle">
-            <h1 class="col-xs-12 col-md-6"><a href="/admin">後台管理系統</a></h1>
-            <nav class="col-xs-12 col-md-6">
+            <h1 class="col-xs-4 col-md-6"><a href="/admin"><img src="{{ URL::asset('/images/logo_b.svg') }}"><span>後台管理系統</span></a></h1>
+            <nav class="col-xs-8 col-md-6">
                 <ul class="flex flex-middle flex-right">
-                    <li><a href="/admin">後台首頁</a></li>
-                    <li><a href="/">網站首頁</a></li>
+                    <li><a href="{{ url('/admin') }}"><i class="fa fa-tachometer fa-lg"></i><span>後台首頁</span></a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-home fa-lg"></i><span>網站首頁</span></a></li>
+                    <li><a href="{{ url('/admin/logout') }}"><i class="fa fa-sign-out fa-lg"></i><span>登出</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -30,25 +32,58 @@
     @endif
 
     <main class="container-fluid">
-        <div class="row">
+        <div class="row flex flex-wrap">
             @if (Auth::check())
-            <aside class="col-xs-12 col-sm-3 col-md-2">
+            <aside class="col-xs-12 col-sm-3 col-lg-2">
                 <ul>
                     <li>
-                        <a href="#">TEST</a>
+                        <a href="#" class="flex flex-middle">
+                            <span>TEST</span>
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
                         <ul>
                             <li><a href="#">SUB TEST</a></li>
                             <li><a href="#">SUB TEST</a></li>
                             <li><a href="#">SUB TEST</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">TEST</a></li>
-                    <li><a href="#">TEST</a></li>
-                    <li><a href="#">TEST</a></li>
+                    <li>
+                        <a href="#" class="flex flex-middle">
+                            <span>TEST</span>
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        <ul>
+                            <li><a href="#">SUB TEST</a></li>
+                            <li><a href="#">SUB TEST</a></li>
+                            <li><a href="#">SUB TEST</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="flex flex-middle">
+                            <span>TEST</span>
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        <ul>
+                            <li><a href="#">SUB TEST</a></li>
+                            <li><a href="#">SUB TEST</a></li>
+                            <li><a href="#">SUB TEST</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="flex flex-middle">
+                            <span>TEST</span>
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        <ul>
+                            <li><a href="#">SUB TEST</a></li>
+                            <li><a href="#">SUB TEST</a></li>
+                            <li><a href="#">SUB TEST</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </aside>
             @endif
-            <article class="@if (Auth::check()) col-xs-12 col-sm-9 col-md-10 @else col-xs-12 @endif">
+            <article class="@if (Auth::check()) col-xs-12 col-sm-9 col-lg-10 @else col-xs-12 @endif">
                 <div class="row">
                     @yield('content')
                 </div>
