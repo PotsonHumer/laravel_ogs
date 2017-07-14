@@ -335,7 +335,7 @@ aside ul{
 
 aside ul ul{
 	padding-left: 30px;
-	padding-bottom: 30px;
+	max-height: 0;
 	overflow: hidden;
 }
 
@@ -351,8 +351,27 @@ aside li a:hover{
 	color: #03BBDD;
 }
 
+aside li a:active,
+aside li a:visited,
+aside li a:focus{
+	text-decoration: none;
+	color: #FFF;
+}
+
+aside li.open > a i:before{
+	content: "\f078";
+}
+
+aside li.open ul{
+	max-height: 1000px;
+}
+
 aside ul ul li a{
 	color: #BBB;
+}
+
+aside > ul > li{
+	padding-bottom: 30px;
 }
 
 aside > ul > li > a i{

@@ -10,10 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/admin.css" rel="stylesheet">
+    <link href="{{ URL::asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/admin.css') }}" rel="stylesheet">
 
 </head>
 <body class="floatBgBefore floatBgAfter">
@@ -36,54 +36,9 @@
     <main class="container-fluid">
         <div class="row flex flex-wrap">
             @if (Auth::check())
-            <aside class="col-xs-12 col-sm-3 col-lg-2">
-                <ul>
-                    <li>
-                        <a href="#" class="flex flex-middle">
-                            <span>TEST</span>
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                        <ul>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="flex flex-middle">
-                            <span>TEST</span>
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                        <ul>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="flex flex-middle">
-                            <span>TEST</span>
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                        <ul>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="flex flex-middle">
-                            <span>TEST</span>
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                        <ul>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                            <li><a href="#">SUB TEST</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
+
+                @include('admin.aside')
+
             @endif
             <article class="@if (Auth::check()) col-xs-12 col-sm-9 col-lg-10 @else col-xs-12 @endif">
                 <div class="row">
@@ -93,7 +48,8 @@
         </div>
     </main>
 
-    <script src="/js/jquery-3.2.1.min.js" defer></script>
-    <script src="/js/bootstrap.min.js" defer></script>
+    <script src="{{ URL::asset('/js/jquery-3.2.1.min.js') }}" defer></script>
+    <script src="{{ URL::asset('/js/bootstrap.min.js') }}" defer></script>
+    <script src="{{ URL::asset('/js/admin/common.js') }}" defer></script>
 </body>
 </html>
