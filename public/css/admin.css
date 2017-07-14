@@ -213,6 +213,18 @@ i.fa{
 	margin-right: 0.3em;
 }
 
+@media (max-width: 992px){
+	body:after{
+		background-size: 65%;
+	}
+}
+
+@media (max-width: 767px){
+	body:after{
+		background-size: 80%;
+	}
+}
+
 /** common end **/
 
 
@@ -373,8 +385,13 @@ header + main > div.row{
 /** loginForm start **/
 
 #loginForm{
+	position: relative;
 	font-size: 1rem;
-	margin-top: 3em;
+	min-height: 100vh;
+}
+
+#loginForm > form{
+	margin-top: -10vh;
 }
 
 #loginForm h1{
