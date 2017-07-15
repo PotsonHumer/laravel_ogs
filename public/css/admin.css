@@ -190,11 +190,8 @@ body{
 body:before{
 	position: fixed !important;
 	background: #03bbdd;
-	background: -moz-linear-gradient(top, #03bbdd 0%, #00b1a9 100%);
 	background: -webkit-linear-gradient(top, #03bbdd 0%,#00b1a9 100%);
 	background: linear-gradient(to bottom, #03bbdd 0%,#00b1a9 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03bbdd', endColorstr='#00b1a9',GradientType=0 );
-
 	z-index: -3;
 }
 
@@ -237,14 +234,14 @@ header{
 }
 
 header:before{
-	/* background: #03BBDD; */
 	z-index: -2;
+	background: #000;
 
-	background: #03bbdd;
-	background: -moz-linear-gradient(top, #03bbdd 0%, #00b1a9 100%);
+	/*
+	background: #03BBDD;
 	background: -webkit-linear-gradient(top, #03bbdd 0%,#00b1a9 100%);
 	background: linear-gradient(to bottom, #03bbdd 0%,#00b1a9 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03bbdd', endColorstr='#00b1a9',GradientType=0 );
+	*/
 }
 
 header:after{
@@ -253,12 +250,12 @@ header:after{
 	bottom: 0;
 	background: rgba(0,0,0,0.5);
 	border-bottom: 1px solid #000;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 	z-index: 2;
 }
 
 header > div.row{
-	min-height: 45px;
+	height: 45px;
 }
 
 header nav ul{
@@ -308,9 +305,9 @@ header a:active{
 aside{
 	position: relative;
 	font-size: 1rem;
-	box-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
 	z-index: 2;
-	border-right: 2px solid #000;
+	border-right: 1px solid #000;
 	padding-top: 1em;
 	padding-bottom: 1em;
 }
@@ -323,7 +320,9 @@ aside:before{
 	width: 100%;
 	height: 100%;
 	z-index: -1;
-	background: rgba(0,0,0,0.7);
+
+	background: -webkit-linear-gradient(left, rgba(0,70,127,0.49) 0%,rgba(19,78,94,0.5) 100%);
+	background: linear-gradient(to right, rgba(0,70,127,0.49) 0%,rgba(19,78,94,0.5) 100%);
 }
 
 aside ul{
@@ -333,22 +332,29 @@ aside ul{
 	padding: 0;
 }
 
+aside li{
+	border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
 aside ul ul{
-	padding-left: 30px;
 	max-height: 0;
 	overflow: hidden;
 }
 
+aside ul ul li a{
+	padding-left: 2em;
+}
+
 aside li a{
 	display: block;
-	padding: 0.5em 0;
-	border-bottom: 1px solid rgba(255,255,255,0.2);
+	padding: 0.5em;
+	border-bottom: 1px solid #000;
 	color: #FFF;
 }
 
 aside li a:hover{
 	text-decoration: none;
-	color: #03BBDD;
+	color: #03BBDD !important;
 }
 
 aside li a:active,
@@ -357,6 +363,13 @@ aside li a:focus{
 	text-decoration: none;
 	color: #FFF;
 }
+
+aside ul ul li a:active,
+aside ul ul li a:visited,
+aside ul ul li a:focus{
+	color: #BBB;
+}
+
 
 aside li.open > a i:before{
 	content: "\f078";
@@ -367,11 +380,12 @@ aside li.open ul{
 }
 
 aside ul ul li a{
+	font-size: 0.9em;
 	color: #BBB;
 }
 
 aside > ul > li{
-	padding-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 aside > ul > li > a i{
@@ -397,6 +411,10 @@ header + main > div.row{
 	min-height: calc(100vh - 45px);
 }
 
+main article{
+	min-height: calc(100vh - 45px) !important;
+}
+
 /** main end **/
 
 
@@ -406,10 +424,11 @@ header + main > div.row{
 #loginForm{
 	position: relative;
 	font-size: 1rem;
-	min-height: 100vh;
+	height: 100vh;
 }
 
 #loginForm > form{
+	width: 100%;
 	margin-top: -10vh;
 }
 

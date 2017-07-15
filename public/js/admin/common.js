@@ -9,6 +9,8 @@ $(function(){
 		var singleHeight = parent.height();
 
 		if(sub.length > 0){
+			event.preventDefault();
+
 			var subHeight = Number(sub.children('li').length) * singleHeight;
 
 			sub.addClass('animate');
