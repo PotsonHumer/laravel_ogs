@@ -11,17 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['domain' => '{account}.test.org'], function() {
+	Route::get('/', 'DomainController@index');
+	Route::get('/{method}', 'DomainController@method');
 });
 
-Route::get('/home', 'HomeController@index');
+
+#Route::get('/home', 'HomeController@index');
 
 
 /**
 * 會員路由
 */
 Auth::routes();
+
 
 /**
 * 後台路由
@@ -35,4 +39,9 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::group(['middleware' => 'auth.admin'], function() {
 		Route::get('/', 'AdminController@index');
 	});
+});
+
+
+Route::get('/', function () {
+    return view('errors.404');
 });
