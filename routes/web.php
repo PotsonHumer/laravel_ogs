@@ -12,36 +12,46 @@
 */
 
 
-Route::group(['domain' => '{account}.test.org'], function() {
-	Route::get('/', 'DomainController@index');
-	Route::get('/{method}', 'DomainController@method');
-});
-
-
-#Route::get('/home', 'HomeController@index');
-
-
 /**
 * 會員路由
 */
-Auth::routes();
+#Auth::routes();
 
 
 /**
 * 後台路由
 */
 Route::group(['prefix' => 'admin'], function() {
-	Route::get('/login', 'AdminController@loginForm');
-	Route::get('/logout', 'AdminController@logout');
+    Route::get('/login', 'Admin\AdminController@loginForm');
+    Route::get('/logout', 'Admin\AdminController@logout');
+    Route::post('/login', 'Admin\AdminController@login');
 
-	Route::post('/login', 'AdminController@login');
+    Route::group(['middleware' => 'auth.admin'], function() {
+        Route::get('/', 'Admin\AdminController@index');
 
-	Route::group(['middleware' => 'auth.admin'], function() {
-		Route::get('/', 'AdminController@index');
-	});
+        Route::get('/{classes}/{method}', function($classes,$method){
+            return App::make('App\Http\Controllers\Admin\\'.ucwords($classes).'Controller')->callAction($method,[]);
+        });
+
+        Route::get('/{classes}/{method}/{params}', function($classes,$method,$params){
+            return App::make('App\Http\Controllers\Admin\\'.ucwords($classes).'Controller')->callAction($method,explode('/',$params));
+        });
+    });
 });
 
 
+/**
+* 前台路由
+*/
+Route::group(['middleware' => 'domain'], function() {
+    #Route::get('/', 'DomainController@index');
+    #Route::get('/{method}', 'DomainController@method');
+});
+
+
+/**
+* 無指定 404
+*/
 Route::get('/', function () {
     return view('errors.404');
 });

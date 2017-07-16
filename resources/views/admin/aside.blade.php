@@ -6,9 +6,8 @@
                 <i class="fa fa-chevron-right"></i>
             </a>
             <ul>
-                <li><a href="#">站點設定</a></li>
-                <li><a href="#">管理員設定</a></li>
-                <li><a href="#">管理員設定</a></li>
+                <li><a href="{{ URL::asset('/admin/platform/site') }}">站點設定</a></li>
+                <li><a href="{{ URL::asset('/admin/platform/manager') }}">管理員設定</a></li>
             </ul>
         </li>
         <!--

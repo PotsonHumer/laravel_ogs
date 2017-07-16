@@ -207,7 +207,39 @@ body:after{
 }
 
 i.fa{
+	display: inline-block;
 	margin-right: 0.3em;
+}
+
+.fa-lg{
+	vertical-align: -0.05em;
+}
+
+.table{
+	letter-spacing: 0.05em;
+	background: rgba(255,255,255,0.7);
+}
+
+.table tr:nth-child(2){
+	background: rgba(255,255,255,0.5);
+}
+
+.table th{
+	color: #FFF;
+	background: #000;
+	padding-top: 0.5em !important;
+	padding-bottom: 0.5em !important;
+}
+
+.table th,
+.table td{
+	vertical-align: middle !important;
+}
+
+h2{
+	padding: 0;
+	margin: 0;
+	color: #FFF;
 }
 
 @media (max-width: 992px){
@@ -451,3 +483,21 @@ main article{
 }
 
 /** loginForm end **/
+
+
+
+/** sub_menu start **/
+
+.sub_menu{
+	font-size: 1rem;
+	list-style: none;
+	margin: 2em 0;
+}
+
+.sub_menu li{
+	display: inline-block;
+	margin: 0 0.5em;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/** sub_menu end **/
