@@ -4,13 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\AdminSideService;
 
 class PlatformController extends Controller
 {
 
-    private $viewOutput = [
-        'aside_platform' => 'open'
-    ];
+    protected $asideService;
+
+    private $viewOutput = [];
+
+    public function __construct()
+    {
+        $this->asideService = new AdminSideService;
+    }
 
 
     /**
@@ -27,8 +33,9 @@ class PlatformController extends Controller
     */
     public function site()
     {
-        $this->viewOutput['aside_platform_site'] = 'active';
-        return view('admin/platform/site_list', $this->viewOutput);
+        $this->asideService->assign('platform','site');
+
+        return $this->template('admin/platform/site_list');
     }
 
 
@@ -37,8 +44,20 @@ class PlatformController extends Controller
     */
     public function site_add()
     {
-        $this->viewOutput['aside_platform_site'] = 'active';
-        return view('admin/platform/site_add', $this->viewOutput);
+        $this->asideService->assign('platform','site');
+
+        return $this->template('admin/platform/site_add');
+    }
+
+
+    /**
+    * 輸出 Template
+    */
+    private function template($template)
+    {
+        $this->viewOutput = $this->asideService->output($this->viewOutput);
+
+        return view($template, $this->viewOutput);
     }
 
 
