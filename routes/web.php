@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Http\Request;
 
 /**
 * 會員路由
@@ -31,6 +31,10 @@ Route::group(['prefix' => 'admin'], function() {
 
         Route::get('/{classes}/{method}', function($classes,$method){
             return App::make('App\Http\Controllers\Admin\\'.ucwords($classes).'Controller')->callAction($method,[]);
+        });
+
+        Route::post('/{classes}/{method}', function($classes,$method,Request $request){
+            return App::make('App\Http\Controllers\Admin\\'.ucwords($classes).'Controller')->callAction('post_'.$method,[$request]);
         });
 
         Route::get('/{classes}/{method}/{params}', function($classes,$method,$params){
