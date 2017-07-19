@@ -170,6 +170,11 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
 
         /*
+         * Generator Service Provider
+         */
+        \Yish\Generators\GeneratorsServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
