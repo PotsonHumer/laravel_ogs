@@ -236,6 +236,10 @@ i.fa{
 	vertical-align: middle !important;
 }
 
+blockquote{
+	margin: 1em 0;
+}
+
 h2{
 	padding: 0;
 	margin: 0;
@@ -384,7 +388,9 @@ aside li a{
 	color: #FFF;
 }
 
-aside li a:hover{
+aside li a:hover,
+aside li.open > a,
+aside li.open ul a.active{
 	text-decoration: none;
 	color: #03BBDD !important;
 }
@@ -399,7 +405,7 @@ aside li a:focus{
 aside ul ul li a:active,
 aside ul ul li a:visited,
 aside ul ul li a:focus{
-	color: #BBB;
+	color: #DDD;
 }
 
 
@@ -491,7 +497,7 @@ main article{
 .sub_menu{
 	font-size: 1rem;
 	list-style: none;
-	margin: 2em 0;
+	margin: 2em 0 1em 0;
 }
 
 .sub_menu li{
@@ -501,3 +507,20 @@ main article{
 }
 
 /** sub_menu end **/
+
+
+
+/** adminForm start **/
+
+.adminForm{
+	padding: 15px;
+	font-size: 1rem;
+	background: rgba(255,255,255,0.5);
+	border-radius: 5px;
+}
+
+.adminForm .hspan{
+	margin-bottom: 15px;
+}
+
+/** adminForm end **/

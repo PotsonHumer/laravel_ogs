@@ -1,7 +1,6 @@
 $(function(){
 
 	/* 側邊選單展縮特效 */
-
 	$('aside > ul > li > a').click(function(event){
 		var parent       = $(this).parent('li');
 		var sub          = $(this).next('ul');
@@ -26,5 +25,19 @@ $(function(){
 			}
 		}
 
+	});
+
+
+	/*  動態增加式欄位 */
+	$('.dynamic').each(function(index){
+		var thisDynamic = $(this);
+		var appendClass = 'dynamic_' + index;
+		var element = thisDynamic.clone().wrap('<div>').parent().html();
+
+		thisDynamic.addClass(appendClass);
+
+		$(document).on('click','.' + appendClass + '_add',function(){
+			thisDynamic.after(element);
+		});
 	});
 });

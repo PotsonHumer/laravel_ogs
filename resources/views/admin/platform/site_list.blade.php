@@ -10,10 +10,10 @@
 			<table class="table table-hover table-condensed">
 				<tr>
 					<th class="text-center">選取</th>
-					<th class="text-center">站點 ID</th>
-					<th class="text-center">站點名稱</th>
+					<th class="text-center">站台 ID</th>
+					<th class="text-center">站台名稱</th>
 					<th class="text-center">公司名稱</th>
-					<th class="text-center">站點狀態</th>
+					<th class="text-center">站台狀態</th>
 					<th class="text-center">管理</th>
 					<th class="text-center">刪除</th>
 				</tr>
@@ -26,7 +26,7 @@
 					<td class="text-center"></td>
 					<td class="text-center">
 						<a class="btn btn-success active" href="#">
-							<i class="fa fa-pencil-square-o fa-lg"></i><span>開啟</span>
+							<i class="fa fa-power-off fa-lg"></i><span>開啟</span>
 						</a>
 					</td>
 					<td class="text-center">

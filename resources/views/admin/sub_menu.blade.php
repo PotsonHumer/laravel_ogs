@@ -1,7 +1,7 @@
 <div id="platform" class="site clear">
 	<ul class="sub_menu col-xs-12 flex flex-wrap">
 		<li class="animate">
-			<a class="btn btn-primary" href="#">
+			<a class="btn btn-primary" href="{{ URL::asset('/admin/platform/site_add') }}">
 				<i class="fa fa-plus fa-lg"></i><span>新增站台</span>
 			</a>
 		</li>
