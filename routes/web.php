@@ -29,6 +29,25 @@ Route::group(['prefix' => 'admin'], function() {
     Route::group(['middleware' => 'auth.admin'], function() {
         Route::get('/', 'Admin\AdminController@index');
 
+        /* middleware 寫法 */
+        Route::group(['middleware' => 'adminRoute'], function() {
+            Route::any('{all}', function(Request $request){
+
+                $classes  = $request->get('classes');
+                $function = $request->get('function');
+                $params   = $request->get('params');
+                $isPass   = $request->get('isPass');
+
+                if($isPass){
+                    return App::make($classes)->callAction($function,$params);
+                }else{
+                    return view('errors.404');
+                }
+
+            })->where('all', '.*');
+        });
+
+        /* 舊寫法
         Route::get('/{classes}/{method}', function($classes,$method){
             return App::make('App\Http\Controllers\Admin\\'.ucwords($classes).'Controller')->callAction($method,[]);
         });
@@ -40,6 +59,7 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/{classes}/{method}/{params}', function($classes,$method,$params){
             return App::make('App\Http\Controllers\Admin\\'.ucwords($classes).'Controller')->callAction($method,explode('/',$params));
         });
+        */
     });
 });
 
