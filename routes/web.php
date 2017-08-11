@@ -21,17 +21,21 @@ use Illuminate\Http\Request;
 /**
 * 後台路由
 */
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin'], function()
+{
     Route::get('/login', 'Admin\AdminController@loginForm');
     Route::get('/logout', 'Admin\AdminController@logout');
     Route::post('/login', 'Admin\AdminController@login');
 
-    Route::group(['middleware' => 'auth.admin'], function() {
+    Route::group(['middleware' => 'auth.admin'], function()
+    {
         Route::get('/', 'Admin\AdminController@index');
 
         /* middleware 寫法 */
-        Route::group(['middleware' => 'adminRoute'], function() {
-            Route::any('{all}', function(Request $request){
+        Route::group(['middleware' => 'adminRoute'], function()
+        {
+            Route::any('{all}', function(Request $request)
+            {
 
                 $classes  = $request->get('classes');
                 $function = $request->get('function');
@@ -67,7 +71,8 @@ Route::group(['prefix' => 'admin'], function() {
 /**
 * 前台路由
 */
-Route::group(['middleware' => 'domain'], function() {
+Route::group(['middleware' => 'domain'], function()
+{
     #Route::get('/', 'DomainController@index');
     #Route::get('/{method}', 'DomainController@method');
 });
@@ -76,6 +81,7 @@ Route::group(['middleware' => 'domain'], function() {
 /**
 * 無指定 404
 */
-Route::get('/', function () {
+Route::get('/', function ()
+{
     return view('errors.404');
 });
