@@ -70,7 +70,6 @@ class AdminRouteMiddleware
         $controller = sprintf($this->control, $classes);
 
         if(isset($params)) $this->params = $params;
-        if($this->method != 'GET') $this->params = [$request,$this->params];
 
         $this->classes  = $controller;
         $this->function = ($this->method != 'GET') ? strtolower($this->method).'_'.$function : $function;

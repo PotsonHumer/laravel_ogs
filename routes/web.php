@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin'], function()
                 $isPass   = $request->get('isPass');
 
                 if($isPass){
-                    return App::make($classes)->callAction($function,$params);
+                    return App::make($classes)->callAction($function,[$request,$params]);
                 }else{
                     return view('errors.404');
                 }
