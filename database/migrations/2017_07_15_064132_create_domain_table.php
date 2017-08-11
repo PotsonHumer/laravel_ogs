@@ -24,8 +24,8 @@ class CreateDomainTable extends Migration
             $table->unsignedBigInteger('siteid')->index()->nullable()->default(NULL)->comment('站點ID');
             $table->foreign('siteid')->references('id')->on('site')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->string('protocol')->nullable()->default(NULL)->comment('連線協定');
-            $table->string('name')->nullable()->default(NULL)->comment('綁定 Domain name');
+            $table->boolean('ssl')->index()->default(false)->comment('SSL 加密');
+            $table->string('name')->index()->nullable()->default(NULL)->comment('綁定 Domain name');
 
             $table->timestamps();
         });
