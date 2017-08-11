@@ -18,7 +18,7 @@ class AdminRouteMiddleware
      * @param  Array     $args      路徑分解陣列
      * @param  String    $control   控制器路徑
      * @param  Boolean   $isPass    是否正確輸出頁面
-     * @return mixed
+     * @return Object               返回下一層 Route 物件
      */
 
     private $method;
@@ -39,6 +39,11 @@ class AdminRouteMiddleware
     }
 
 
+    /**
+    * 分析路徑
+    * @param  Object  $request Request 物件
+    * @return Boolean          是否符合後台路徑條件
+    */
     private function analysis($request)
     {
         $nowArgs = $this->args;
@@ -74,6 +79,12 @@ class AdminRouteMiddleware
     }
 
 
+    /**
+    * 前往下一層 Route
+    * @param  Object $request Request 物件
+    * @param  Object $next    Route 物件
+    * @return Object          返回完整 Route 物件
+    */
     private function next($request,$next)
     {
         if($this->isPass){
