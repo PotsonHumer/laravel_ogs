@@ -26,7 +26,7 @@
 
 				<div class="dynamic input-group hspan">
 					<label class="input-group-addon">綁定網域</label>
-					<select class="form-control" name="protocol[]" required>
+					<select class="form-control" name="ssl[]" required>
 						<option value="">是否開啟 SSL 加密</option>
 						<option value="0">否</option>
 						<option value="1">是</option>

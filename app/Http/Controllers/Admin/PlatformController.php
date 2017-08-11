@@ -5,17 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\AdminSideService;
+use App\SiteModel;
+use App\DomainModel;
 
 class PlatformController extends Controller
 {
 
     protected $asideService;
 
-    private $viewOutput = [];
+    private $viewOutput  = [];
 
     public function __construct()
     {
-        $this->asideService = new AdminSideService;
+        $this->asideService  = new AdminSideService;
     }
 
 
@@ -66,6 +68,19 @@ class PlatformController extends Controller
     */
     public function post_site_add(Request $request)
     {
-        print_r($request->all());
+        $post = $request->all();
+
+        $site   = new SiteModel;
+
+        $site->preInsert($post);
+        $site->save();
+        
+        foreach($post['domain'] as $domainKey => $domainValue){
+            $sslValue = $post['ssl'][$domainKey];
+
+            $site->domain()->create(['name' => $domainValue, 'ssl' => $sslValue]);
+        }
+
+        return $this->site();
     }
 }
